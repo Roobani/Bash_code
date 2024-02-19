@@ -1,3 +1,0 @@
-the syntax is
-
-echo "this is subject" | mutt -a "/opt/scripts/logs/SF_attach_bkup.sh-511293917.log.lrz" -s "test" -- john@sodexis.com

@@ -1,8 +1,0 @@
- @@ doing  sed ' $N '   or  grep -i ' $N'   will only work in command line. inorder for variable to get expanded inside sed or grep.. it should be coted with sed  "$N"   or  gre - i "$N"
-
-
-2.  if [ ! -s "${GIT_NETRC}" ] || ([ '$GET_USER' != "$GIT_USER" ] && [ '$GET_PASS' != "$GIT_PASS" ]); then
-in this if GET_USER = john   and GIT_USER=john1234..  the if check match fully. and tell its not equal. else, tell its equal because, john1234 has john.
-
-3. check if directory is empty.
-[ $(( $(ls -a1 "${BASE_HOME}/${BASE_CODE_v7.0_FOLDER_NAME}" | wc -l) >= 3 )) = 0 ] && echo empty || echo nope

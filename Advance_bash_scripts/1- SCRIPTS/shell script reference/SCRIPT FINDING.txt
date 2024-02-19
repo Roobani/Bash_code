@@ -1,1 +1,0 @@
-# To know how get the source directory of the softlink file.. look at the .git_update.sh   VAR_TEMPLATE variable.

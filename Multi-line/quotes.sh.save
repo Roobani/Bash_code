@@ -1,0 +1,21 @@
+\#!/bin/bash
+
+# string in single line
+
+echo 'Hello Rooban'
+# Srting in double line
+echo "We are javapoint"
+echo
+echo
+#..............................
+#quotes with variabale
+
+name="You are welcome to at Sodexis"
+echo "$name"
+echo '$name'
+#-----------------------------
+echo
+echo
+ quotes with string variable
+
+

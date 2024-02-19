@@ -1,0 +1,20 @@
+ in ssh added -T   and at the end /bin/bash  .. no more error.
+
+out=$(ssh -T -q -o 'BatchMode=yes' ${BACKUP_SERVER_USR}@${BACKUP_SERVER_IP} /bin/bash << "EOF"
+du -hs /home/odoo/Odoo-Backups/Trillium/Attachments/filestore
+echo -e "`find /home/odoo/Odoo-Backups/Trillium/Attachments/filestore -type f | wc -l` files in /home/odoo/Odoo-Backups/Trillium/Attachments/filestore"
+cd /home/odoo/Odoo-Backups/Trillium/Attachments/filestore
+#echo -en "Checking "
+#if [ -z "$(md5sum -c --quiet /tmp/TR_attach.md5 2>&1)" ]; then
+#echo -e "md5sum: OK"
+#else
+#echo -e "md5sum: ERROR"
+#echo -e " "
+#md5sum -c --quiet /tmp/TR_attach.md5
+#echo -e " "
+#fi
+EOF
+)
+
+
+

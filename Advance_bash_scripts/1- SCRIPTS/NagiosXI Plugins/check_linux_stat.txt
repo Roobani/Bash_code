@@ -1,0 +1,4 @@
+find disk IO : http://www.techrepublic.com/blog/the-enterprise-cloud/calculate-iops-in-a-storage-array/
+
+
+https://code.google.com/archive/p/ioping/

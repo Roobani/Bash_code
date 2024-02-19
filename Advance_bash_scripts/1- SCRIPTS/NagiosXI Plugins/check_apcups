@@ -1,0 +1,112 @@
+#!/bin/ksh
+# Author: John Britto, Sodexis.
+#
+# This plugin will monitor APC UPS battery charge level using apcaccess and executed using check_nrpe. 
+# It should be Configured in nrpe.cfg as /usr/local/nagios/libexec/check_apcups $ARG1$
+# The warning and critical options for parameter should be set as configured in /etc/apcups/apcupsd.conf
+# Check check_apsupsd_v1_3 to extend.
+
+FIND_KSH="$(which ksh)"
+APCACCESS=/sbin/apcaccess
+HOSTNAME=127.0.0.1
+PORT=3551
+PARAM=BCHARGE
+
+usage() {
+	echo "usage: check_apcupsd [-h hostname] [-p port] [-o parameter] [-w warning_value] [-c critical_value] [-u unit of messure]"
+	echo -n "                      "
+	echo "eg: ./check_apcupsd -h 127.0.0.1 -a 3551 -o BCHARGE -w 80 -c 50 -u %"
+	echo "hostname and port defaults to localhost and 3551, respectively."
+	echo
+	exit 3
+}
+
+if [ $# -lt 1 ]; then
+    print_help
+    exit 3
+fi
+
+while test -n "$1"; do
+    case "$1" in
+        --apchost|-h)
+            HOST=$2
+            shift
+            ;;
+        --apcport|-p)
+            PORT=$2
+            shift
+            ;;
+        --param|-o)
+        	PARAM=$2
+        	shift
+        	;;
+		--warning|-w)
+            WARNING=$2
+            shift
+            ;;
+        --critical|-c)
+            CRITICAL=$2
+            shift
+            ;;
+        --unit|-u)
+			UNIT=$2
+			shift
+			;;
+        *)
+            echo "Unknown argument: $1"
+            usage
+            exit 3
+            ;;
+        esac
+    shift
+done
+
+if [ ! -x "$APCACCESS" ]; then
+	echo "Error: $APCACCESS must exist and be executable!"
+	echo "'apt-get install apcupsd' and configure it"
+	exit 3
+fi
+
+$APCACCESS status ${HOST}:${PORT} > /dev/null
+if [ $? -ne 0 ]; then
+	# The error message from apcaccess will do fine.
+	exit 3
+fi
+
+argchk () {
+	if [ "`echo $PORT | grep '^[0-9][0-9]*$'`" = "" ]; then
+		echo "ERROR: Port must be a positive integer!"
+		exit 3
+	elif [ ! -n "$UNIT" ]; then
+		echo "UNKNOWN: Missing the unit paramter. eg: %"
+		exit 3
+    elif [ ! -n "${WARNING}" ]; then
+        echo "UNKNOWN: Missing waring parameter"
+        exit 3
+    elif [ ! -n "${CRITICAL}" ]; then
+        echo "ERROR: Missing critical parameter"
+        exit 3
+    fi 
+ }
+
+argchk
+
+VALUE=`$APCACCESS status $HOSTNAME:$PORT | grep -i ^$PARAM | awk '{print $3}'`
+
+
+if [ -n "$VALUE" ]; then
+	if [ "$VALUE" -le "$CRITICAL" ]; then
+	    echo "CRITICAL: ${PARAM} ${VALUE}${UNIT} | ${PARAM}=${VALUE}${UNIT};${WARNING};${CRITICAL}"
+	    exit 2
+	elif [ "$VALUE" -ge "$CRITICAL" -a "$VALUE" -le "$WARNING" ]; then
+	    echo "WARNING: ${PARAM} ${VALUE}${UNIT} | ${PARAM}=${VALUE}${UNIT};${WARNING};${CRITICAL}"
+	    exit 1
+	else
+	    echo "OK: ${PARAM} ${VALUE}${UNIT} | ${PARAM}=${VALUE}${UNIT};${WARNING};${CRITICAL}"
+	    exit 0
+	fi
+else
+	echo "UNKNOWN: The plugin didn't return any valid output."
+	exit 3
+fi
+

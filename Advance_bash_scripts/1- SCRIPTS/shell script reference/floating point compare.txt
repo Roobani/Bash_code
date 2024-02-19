@@ -1,0 +1,5 @@
+Install korn shell.
+using yum install ksh.
+
+and in top script..
+#!/bin/ksh

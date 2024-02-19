@@ -1,0 +1,10 @@
+SF bandwidth:-
+
+7 Mbps up.  	25 Mbps Down.
+875 KBps	3125 KBps.		
+
+      		Warning  			Critical
+UP     	6 Mbps a.k.a 750 KBps           7 Mbps a.k.a 875 KBps
+DOWN	23 Mbps a.k.a 2875 KBps		24 Mbps a.k.a 3000 KBps
+
+ 	

@@ -1,0 +1,12 @@
+exports.config = {
+  nodeName: \"${DN}\",
+  logStreams: {
+    TEST_ODOO_${ODOO_VER}: [
+      \"/opt/odoo/${CT}-odoo/logs/odoo-server.log\"
+    ]
+  },
+  server: {
+    host: '149.56.23.22',
+    port: 2505
+  }
+}

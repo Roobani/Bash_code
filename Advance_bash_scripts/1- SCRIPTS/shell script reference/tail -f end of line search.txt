@@ -1,0 +1,1 @@
+http://stackoverflow.com/questions/5024357/do-a-tail-f-until-matching-a-pattern

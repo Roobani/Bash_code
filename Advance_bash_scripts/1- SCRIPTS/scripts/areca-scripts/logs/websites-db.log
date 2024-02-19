@@ -1,0 +1,27 @@
+java version "1.7.0_67"
+Java(TM) SE Runtime Environment (build 1.7.0_67-b01)
+Java HotSpot(TM) 64-Bit Server VM (build 24.65-b04, mixed mode)
+INFO -  - Configuration path : /home/admin/.areca/workspace/Websites-DB/977679628.bcfg
+INFO -  - Target : Websites & DB
+INFO -  - 10%
+INFO -  - Backup in progress ...
+INFO -  - 20%
+INFO -  - 30%
+INFO -  - 40%
+INFO -  - 50%
+INFO -  - 60%
+INFO -  - Committing backup ...
+INFO -  - Creating a copy of the target's XML configuration ...
+INFO -  - Commit completed.
+INFO -  - Checking archive (working directory : /var/app/areca/tmp/chk0) ...
+INFO -  - Data recovery ...
+INFO -  - Recovering ftp://bk486972881@backup329.onlinehome-server.com:21/Websites-DB/storage_977679628/141029 (/areca_rmt/977679628/storage_977679628/141029) (19 files) ...
+INFO -  - 70%
+INFO -  - Recovery completed - Checking recovered files (this may take some time) ...
+INFO -  - Check completed - 19 files checked.
+INFO -  - Cleaning recovered files (/var/app/areca/tmp/chk0) ...
+INFO -  - Recovered files cleaned.
+INFO -  - 80%
+INFO -  - 90%
+INFO -  - 100%
+INFO -  - Backup completed.

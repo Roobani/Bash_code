@@ -1,19 +1,22 @@
-#!/bin/bash
-echo " EXAMPLE 1 "
+GREEN="32"
+BOLDGREEN="\e[1;${GREEN}m"
+RED='\033[1;31m'
+BLUE='\033[1;34mm'
+echo -e "${RED} EXAMPLE 1 {ENDCOLOR}"
 echo
 d=`date +%m-%d-%Y`
 echo "Date in format MM-DD-YYYY"
 echo $d #MM-DD-YYYY
 echo
 
-echo " EXAMPLE 2 "
+echo "EXAMPLE 2"
 d=`date +%m-%Y`
 echo "Date in format MM-YYYY"
 echo $d #MM-YYYY
 echo
 
 
-echo " EXAMPLE 3: Weekday DD-Month-YYYY"
+echo "EXAMPLE 3: Weekday DD-Month-YYYY"
 d1=`date '+%A %d-%m-%Y'`
 d2=`date '+%a %d-%m-%Y'`
 echo "Date in format weekday DD-Month,YYYY"
